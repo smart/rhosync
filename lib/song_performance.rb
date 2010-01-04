@@ -15,7 +15,7 @@ class SongPerformance < SourceAdapter
     page = 1
     @result = {}
     while more == true do
-      url = URI.parse("http://localhost:3100/song_performances.json?page=#{page}")
+      url = URI.parse("#{SERVER_URL}song_performances.json?page=#{page}")
       page += 1
       response = Net::HTTP.get(url)
       parsed = JSON.parse(response)

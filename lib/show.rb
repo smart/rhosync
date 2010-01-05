@@ -10,7 +10,7 @@ class Show < SourceAdapter
   end
 
   def query
-    url = URI.parse("#{SERVER_URL}shows.json")
+    url = URI.parse(@source.url)
     response = Net::HTTP.get(url)
     parsed = JSON.parse(response)
     @result = {}
@@ -21,6 +21,20 @@ class Show < SourceAdapter
      #@parsed.each {|item| @result[item.id.to_s]=item.attributes; p item.attributes;p item.set_lists} if @parsed
      #return @result
    end
+
+  def page(num)
+    page = 1 + num
+    url = URI.parse("#{SERVER_URL}shows.json?page=#{page}")
+    response = Net::HTTP.get(url)
+    parsed = JSON.parse(response)
+    @result = {}
+    parsed.each {|item| @result[item["show"]["id"].to_s]=item["show"]} if parsed
+    if @result.size > 0
+      @result
+    else
+      nil
+    end
+  end
 
   def sync
     # TODO: write code here that converts the data you got back from query into an @result object

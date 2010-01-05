@@ -14,6 +14,20 @@ class Venue < SourceAdapter
      return @result
    end
 
+  def page(num)
+    page = 1 + num
+    url = URI.parse("#{@source.url}?page=#{page}")
+    response = Net::HTTP.get(url)
+    parsed = JSON.parse(response)
+    @result = {}
+    parsed.each {|item| @result[item["venue"]["id"].to_s]=item["venue"]} if parsed
+    if @result.size > 0
+      @result
+    else
+      nil
+    end
+  end
+
   def sync
     # TODO: write code here that converts the data you got back from query into an @result object
     # where @result is a hash of hashes,  each array item representing an object

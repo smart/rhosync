@@ -15,7 +15,7 @@ class SongPerformance < SourceAdapter
     page = 1
     @result = {}
     while more == true do
-      url = URI.parse("#{SERVER_URL}song_performances.json?page=#{page}")
+      url = URI.parse("#{@source.url}")
       page += 1
       response = Net::HTTP.get(url)
       parsed = JSON.parse(response)
@@ -26,6 +26,20 @@ class SongPerformance < SourceAdapter
     @result
     # TODO: write some code here, Query your backend for objects. Put into some variable that is used in sync method below
 
+  end
+
+  def page(num)
+    page = 1 + num
+    url = URI.parse("#{@source.url}?page=#{page}")
+    response = Net::HTTP.get(url)
+    parsed = JSON.parse(response)
+    @result = {}
+    parsed.each {|item| @result[item["song_performance"]["id"].to_s]=item["song_performance"]} if parsed
+    if @result.size > 0
+      @result
+    else
+      nil
+    end
   end
 
   def sync

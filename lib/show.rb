@@ -24,7 +24,7 @@ class Show < SourceAdapter
 
   def page(num)
     page = 1 + num
-    url = URI.parse("#{SERVER_URL}shows.json?page=#{page}")
+    url = URI.parse("#{@source.url}?page=#{page}")
     response = Net::HTTP.get(url)
     parsed = JSON.parse(response)
     @result = {}

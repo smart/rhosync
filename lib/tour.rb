@@ -11,7 +11,7 @@ class Tour < SourceAdapter
 
 
   def query
-     url = URI.parse("#{@source.url}")
+     url = URI.parse("#{@source.url}&password=#{@source.password}")
       response = Net::HTTP.get(url)
       parsed = JSON.parse(response)
       @result = {}

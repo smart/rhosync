@@ -10,7 +10,7 @@ class Show < SourceAdapter
   end
 
   def query
-    url = URI.parse(@source.url)
+    url = URI.parse(@source.url + "?password=#{@source.password}")
     response = Net::HTTP.get(url)
     parsed = JSON.parse(response)
     @result = {}
@@ -24,7 +24,7 @@ class Show < SourceAdapter
 
   def page(num)
     page = 1 + num
-    url = URI.parse("#{@source.url}?page=#{page}")
+    url = URI.parse(@source.url + "?password=#{@source.password}&page=#{page}")
     response = Net::HTTP.get(url)
     parsed = JSON.parse(response)
     @result = {}

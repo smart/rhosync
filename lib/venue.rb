@@ -39,13 +39,13 @@ class Venue < SourceAdapter
   def create(name_value_list,blob=nil)
     #TODO: write some code here
     # the backend application will provide the object hash key and corresponding value
-    raise "Please provide some code to create a single object in the backend application using the hash values in name_value_list"
+    #raise "Please provide some code to create a single object in the backend application using the hash values in name_value_list"
   end
 
   def update(name_value_list)
     #TODO: write some code here
     # be sure to have a hash key and value for "object"
-    raise "Please provide some code to update a single object in the backend application using the hash values in name_value_list"
+    #raise "Please provide some code to update a single object in the backend application using the hash values in name_value_list"
   end
 
   def delete(name_value_list)

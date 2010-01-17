@@ -1,3 +1,6 @@
+require 'open-uri'
+require 'json'
+
 class Venue < SourceAdapter
   def initialize(source,credential)
     super(source,credential)
